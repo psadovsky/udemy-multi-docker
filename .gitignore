@@ -1,0 +1,33 @@
+target/
+indexes/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+.gradle
+gradle.properties
+# dependencies
+node_modules/
+
+### Frontend static resources
+static/
+
+.DS_Store
