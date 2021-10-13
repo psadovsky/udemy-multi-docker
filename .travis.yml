@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sendman2/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run sendman2/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t sendman2/multi-client ./client
+  - docker build -t sendman2/multi-nginx ./nginx
+  - docker build -t sendman2/multi-server ./server
+  - docker build -t sendman2/multi-worker ./worker
+  # Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push to docker hub
+  - docker push sendman2/multi-client
+  - docker push sendman2/multi-nginx
+  - docker push sendman2/multi-server
+  - docker push sendman2/multi-worker
